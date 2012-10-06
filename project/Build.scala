@@ -18,6 +18,8 @@ object ProjectBuild extends Build {
       ),
 
       libraryDependencies ++= Seq(
+        "joda-time" % "joda-time" % "2.1",
+        "org.joda" % "joda-convert" % "1.2",
         "org.specs2" %% "specs2" % "1.12.1" % "test"
       )
     )
