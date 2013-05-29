@@ -59,6 +59,13 @@ class SlugGeneratorSpec extends Specification {
       SlugGenerator.generate("Fabi(e)n") must beEqualTo("fabien")
       SlugGenerator.generate("Fab{ien}") must beEqualTo("fabien")
     }
+
+    "remove extra dashes" in {
+      SlugGenerator.generate("Scala !") must beEqualTo("scala")
+      SlugGenerator.generate("Scala !!!") must beEqualTo("scala")
+      SlugGenerator.generate("Scala : 2.10.0") must beEqualTo("scala-2100")
+      SlugGenerator.generate("Scala   :   2.10.0") must beEqualTo("scala-2100")
+    }
   }
 
 }

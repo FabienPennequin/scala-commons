@@ -3,6 +3,8 @@ package me.pennequin.fabien
 import java.util.regex.Pattern
 import java.text.Normalizer
 
+import me.pennequin.fabien.implicits.StringImplicits._
+
 object SlugGenerator {
 
   private val WHITESPACE = Pattern.compile("[\\s]")
@@ -35,7 +37,7 @@ object SlugGenerator {
 
     // Whitespace
     slug = slug.trim.toLowerCase
-    slug = WHITESPACE.matcher(slug).replaceAll("-").replaceAll("--", "-")
+    slug = WHITESPACE.matcher(slug).replaceAll("-")
 
     // Special chars
     slug = Normalizer.normalize(slug, Normalizer.Form.NFD)
@@ -46,7 +48,9 @@ object SlugGenerator {
     // All other chars...
     slug = NONLATIN.matcher(slug).replaceAll("")
 
-    slug
+    // Remove extra dashes
+    val isDash:(Char => Boolean) = _ == '-'
+    slug.replaceAll("(-){2,}", "-").dropWhile(isDash).dropWhileInverse(isDash)
   }
 
 }
