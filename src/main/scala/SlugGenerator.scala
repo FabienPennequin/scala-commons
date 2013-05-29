@@ -53,4 +53,19 @@ object SlugGenerator {
     slug.replaceAll("(-){2,}", "-").dropWhile(isDash).dropWhileInverse(isDash)
   }
 
+  def generateUnique(name:String, similarSlugs:(String => List[String])):String = {
+    val baseSlug = generate(name)
+
+    var slug = baseSlug
+    var existingSlugs = similarSlugs(baseSlug)
+
+    var num = 0
+    while (existingSlugs.exists(_ == slug)) {
+      num += 1
+      slug = baseSlug + "-" + num
+    }
+
+    slug
+  }
+
 }

@@ -5,6 +5,8 @@ class RichString(s:String) {
 
   def slugify = SlugGenerator.generate(s)
 
+  def slugify(p: (String => List[String])) = SlugGenerator.generateUnique(s, p)
+
   def dropWhileInverse(p: Char => Boolean): String = s.dropRight(suffixLength(p, true))
 
   private def suffixLength(p: Char => Boolean, expectTrue: Boolean): Int = {

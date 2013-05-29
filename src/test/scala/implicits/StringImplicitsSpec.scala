@@ -9,6 +9,9 @@ class StringImplicitsSpec extends Specification {
 
     "add slugify method" in {
       "Test  Slug ! Generator :: for Scala 2.10".slugify must beEqualTo("test-slug-generator-for-scala-210")
+
+      val similar:(String => List[String]) = baseSlug => List(baseSlug, "%s-1".format(baseSlug))
+      "Test  Slug ! Generator :: for Scala 2.10".slugify(similar) must beEqualTo("test-slug-generator-for-scala-210-2")
     }
   }
 

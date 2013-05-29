@@ -68,4 +68,18 @@ class SlugGeneratorSpec extends Specification {
     }
   }
 
+
+  "SlugGenerator.generateUnique method" should {
+
+    "generate a unique slug" in {
+      SlugGenerator.generateUnique("Slug Generator", (slug => List())) must beEqualTo("slug-generator")
+      SlugGenerator.generateUnique("Slug Generator", (slug => List("slug-generator"))) must beEqualTo("slug-generator-1")
+      SlugGenerator.generateUnique(
+        "Slug Generator",
+        (slug => List("slug-generator", "slug-generator-1", "slug-generator-2"))
+      ) must beEqualTo("slug-generator-3")
+    }
+
+  }
+
 }
