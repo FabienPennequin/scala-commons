@@ -63,8 +63,17 @@ class SlugGeneratorSpec extends Specification {
     "remove extra dashes" in {
       SlugGenerator.generate("Scala !") must beEqualTo("scala")
       SlugGenerator.generate("Scala !!!") must beEqualTo("scala")
-      SlugGenerator.generate("Scala : 2.10.0") must beEqualTo("scala-2100")
-      SlugGenerator.generate("Scala   :   2.10.0") must beEqualTo("scala-2100")
+      SlugGenerator.generate("Scala : 2.10.0") must beEqualTo("scala-2-10-0")
+      SlugGenerator.generate("Scala   :   2.10.0") must beEqualTo("scala-2-10-0")
+      SlugGenerator.generate("Niveau -3") must beEqualTo("niveau-3")
+    }
+
+    "replace . (dot) by a dash" in {
+      SlugGenerator.generate("Scala 2.10.1") must beEqualTo("scala-2-10-1")
+    }
+
+    "replace _ (underscore) by a dash" in {
+      SlugGenerator.generate("Scala__2_10_1") must beEqualTo("scala-2-10-1")
     }
   }
 

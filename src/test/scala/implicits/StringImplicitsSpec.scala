@@ -8,10 +8,10 @@ class StringImplicitsSpec extends Specification {
     import me.pennequin.fabien.implicits.StringImplicits._
 
     "add slugify method" in {
-      "Test  Slug ! Generator :: for Scala 2.10".slugify must beEqualTo("test-slug-generator-for-scala-210")
+      "Test  Slug ! Generator :: for Scala 2.10".slugify must beEqualTo("test-slug-generator-for-scala-2-10")
 
       val similar:(String => List[String]) = baseSlug => List(baseSlug, "%s-1".format(baseSlug))
-      "Test  Slug ! Generator :: for Scala 2.10".slugify(similar) must beEqualTo("test-slug-generator-for-scala-210-2")
+      "Test  Slug ! Generator :: for Scala 2.10".slugify(similar) must beEqualTo("test-slug-generator-for-scala-2-10-2")
     }
   }
 

@@ -29,7 +29,11 @@ object SlugGenerator {
     "€" -> "e",
     "£" -> "l",
     "æ" -> "ae",
-    "ø" -> "o"
+    "ø" -> "o",
+
+    // Extras
+    "\\." -> "-",
+    "_" -> "-"
   ) 
 
   def generate(input:String):String = {
